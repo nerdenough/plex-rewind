@@ -279,7 +279,7 @@ export function TimelineCard({ title, subtitle, timeline, unit, childUnit, singl
       </div>
 
       <div className="timeline-body">
-        <div style={{ minWidth: 0 }}>
+        <div className="timeline-main">
           {mode === 'table' ? (
             <TimelineTable timeline={timeline} single={single} unit={unit} />
           ) : (
