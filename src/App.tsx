@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { findUser, getHistory, getLibraries, type Library, type Play, type User } from './api'
 import { fmtLong, fromISODate, rangeTitle, toISODate } from './lib/dates'
 import { fmtInt } from './lib/format'
-import { configFor, isAudiobooks } from './views/configs'
+import { storyYear } from './lib/story'
+import { StoryDialog } from './components/StoryDialog'
+import { configFor, isAudiobooks, isMusic } from './views/configs'
 import { LibraryView } from './views/LibraryView'
 
 type Preset = 'ytd' | 'last30' | 'last90' | 'last365' | 'lastyear' | 'custom'
@@ -154,6 +156,8 @@ export default function App() {
   }, [library, preset, custom])
 
   // History for the current selection. Keep the previous result on screen while loading.
+  // The selection the story dialog was opened for, so it closes when the selection changes.
+  const [storyKey, setStoryKey] = useState<string | null>(null)
   const [result, setResult] = useState<{ key: string; plays: Play[]; library: Library; range: typeof range } | null>(null)
   const [progressState, setProgress] = useState<{ key: string; loaded: number; total: number } | null>(null)
   const [errorState, setLoadError] = useState<{ key: string; message: string } | null>(null)
@@ -184,6 +188,7 @@ export default function App() {
   const busy = !!library && result?.key !== requestKey && !loadError
   const progress = busy ? (progressState?.key === requestKey ? progressState : { loaded: 0, total: 0 }) : null
   const cfg = library ? configFor(library) : null
+  const canStory = !!result && !busy && isMusic(result.library) && storyYear(result.range) !== null && result.plays.length > 0
 
   return (
     <div className="app">
@@ -252,14 +257,34 @@ export default function App() {
 
       {library && cfg && (
         <section className="hero">
-          <div className="eyebrow">{library.section_name}</div>
-          <h1>
-            {cfg.noun} in Review: <span className="year">{rangeTitle(range.after, range.before)}</span>
-          </h1>
-          <div className="meta">
-            {fmtLong(fromISODate(range.after))} – {fmtLong(fromISODate(range.before))} · {user?.friendly_name}
+          <div>
+            <div className="eyebrow">{library.section_name}</div>
+            <h1>
+              {cfg.noun} in Review: <span className="year">{rangeTitle(range.after, range.before)}</span>
+            </h1>
+            <div className="meta">
+              {fmtLong(fromISODate(range.after))} – {fmtLong(fromISODate(range.before))} · {user?.friendly_name}
+            </div>
           </div>
+          {canStory && (
+            <button className="share-btn" onClick={() => setStoryKey(requestKey)}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="6" y="2" width="12" height="20" rx="3" />
+                <path d="M12 7v7M9 10l3-3 3 3" />
+              </svg>
+              Share your year
+            </button>
+          )}
         </section>
+      )}
+
+      {result && canStory && storyKey === requestKey && (
+        <StoryDialog
+          plays={result.plays}
+          range={result.range}
+          user={user?.friendly_name ?? ''}
+          onClose={() => setStoryKey(null)}
+        />
       )}
 
       {loadError && (

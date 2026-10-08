@@ -128,11 +128,14 @@ function common(s: Summary, unit: string): StatDef[] {
   ]
 }
 
+/** Music extractors and skip threshold, shared with the story cards. */
+export const music = { artist, song, album, minSeconds: 30 }
+
 const CONFIGS: Record<string, ViewConfig> = {
   artist: {
     noun: 'Music',
     unit: ['play', 'plays'],
-    minSeconds: 30,
+    minSeconds: music.minSeconds,
     timelines: [
       {
         title: 'Top artists, week by week',
@@ -271,6 +274,8 @@ const FALLBACK: ViewConfig = {
 
 export const isAudiobooks = (library: Library) =>
   library.section_type === 'artist' && /audio\s*books?|podcasts?|books/i.test(library.section_name)
+
+export const isMusic = (library: Library) => library.section_type === 'artist' && !isAudiobooks(library)
 
 export function configFor(library: Library) {
   if (isAudiobooks(library)) return AUDIOBOOKS

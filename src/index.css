@@ -285,6 +285,36 @@ button {
 
 .hero {
   margin: 8px 0 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 0;
+  background: linear-gradient(90deg, var(--series-1), var(--series-7) 55%, var(--series-5));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 6px 20px var(--glow-a);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.share-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 26px var(--glow-b);
+}
+
+.share-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
 .hero .eyebrow {
@@ -915,4 +945,115 @@ table.data thead th:first-child {
 
 .chart.heat {
   height: 320px;
+}
+
+/* ---------- story cards ---------- */
+
+.story-dialog {
+  width: min(1180px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  color: var(--text-primary);
+}
+
+.story-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.story-dialog h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.story-dialog .sub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .story-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(260px, 70vw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+
+  .story-card {
+    scroll-snap-align: start;
+  }
+}
+
+.story-card {
+  margin: 0;
+  min-width: 0;
+}
+
+.story-card canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  background: var(--surface-2);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  opacity: 0.4;
+  transition: opacity 0.25s;
+}
+
+.story-card canvas.ready {
+  opacity: 1;
+}
+
+.story-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.story-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.story-actions button {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.story-actions button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.story-actions button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }

@@ -9,6 +9,8 @@ A personal "year in review" of your own Plex activity, built from Tautulli histo
 
 Every view also has headline stats, a day/hour heatmap and a breakdown by device. The timelines support legend toggling, zoom, stacked, line or table views, and clicking a week opens its full chart.
 
+For music, when the range is a whole year or year to date, **Share your year** makes Spotify Wrapped-style story cards (1080×1920 PNG) to copy, save or share: top artist, top song, top albums (one per artist) and each month's top artist. Copying images needs HTTPS or localhost; elsewhere use Save.
+
 Date range defaults to year to date, with presets and a custom range. Library and range live in the URL, so a view can be bookmarked.
 
 ## Setup
@@ -17,7 +19,7 @@ Create `.env` (gitignored) in the project root:
 
 ```sh
 TAUTULLI_API_KEY=your-key          # Tautulli → Settings → Web Interface → API
-TAUTULLI_URL=http://10.0.0.20:8181 # optional, this is the default
+TAUTULLI_URL=http://localhost:8181 # optional, this is the default
 TAUTULLI_USER=username             # optional, this is the default; Plex username or Tautulli friendly name
 ```
 
