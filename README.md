@@ -1,19 +1,46 @@
 # Plex Rewind
 
-A personal "year in review" of your own Plex activity, built from Tautulli history. Each library gets its own view:
+_Note: This repo is vibe coded slop. It does what I want, and that's the main thing._
 
-- **Music**: weekly timelines of top artists and top songs, plus top artists, songs and albums. Versions of a song (live, acoustic, demo, remaster, take N, remix, session…) are merged into one song.
-- **TV**: weekly top shows, top shows and most-watched episodes.
-- **Movies**: movies per week and most-watched movies.
-- **Audiobooks**: artist-type libraries whose name contains "audiobook", "book" or "podcast": top books and authors.
+I mainly wanted a music rewind reminiscent to Spotify's, but ended up making a proper dashboard with some more interesting insights as well. Main use case is music, but works for any libraries like Movies and TV.
 
-Every view also has headline stats, a day/hour heatmap and a breakdown by device. The timelines support legend toggling, zoom, stacked, line or table views, and clicking a week opens its full chart.
+### Features
 
-For music, when the range is a whole year or year to date, **Share your year** makes Spotify Wrapped-style story cards (1080×1920 PNG) to copy, save or share: top artist, top song, top albums (one per artist) and each month's top artist. Copying images needs HTTPS or localhost; elsewhere use Save.
+Kinda like Spotify rewind:
 
-Date range defaults to year to date, with presets and a custom range. Library and range live in the URL, so a view can be bookmarked.
+![alt text](screenshots/image-1.png)
+
+Top Section with page navigation per library on your Plex server:
+
+![Top Section](screenshots/image-2.png)
+
+Top artists, week-by-week:
+
+![Top artists week by week](screenshots/image-3.png)
+
+Top songs, week-by-week:
+
+![Top songs week by week](screenshots/image-4.png)
+
+Top stats.
+
+![Top stats](screenshots/image-5.png)
+
+Habits and most played on devices (not pictured).
+
+![Habits](screenshots/image-7.png)
+
+## Some caveats
+
+- I listen to a lot of different versions of the same songs, e.g. live, early takes, outtakes, etc. I wanted them to all count as the same song in the stats.
+
+![hover over the versions to see the unique tracks](screenshots/image-6.png)
+
+- This dashboard depends on [Tautulli](https://tautulli.com/) to be connected to the server you want to use this with.
 
 ## Setup
+
+This part and below was written by AI, the above is the human stuff.
 
 Create `.env` (gitignored) in the project root:
 
