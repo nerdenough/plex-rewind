@@ -31,11 +31,11 @@
   --seq-hi: #cde2fb;
 
   --radius: 18px;
-  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']) {
+  :root:not([data-theme="dark"]) {
     color-scheme: light;
     --page: #f9f9f7;
     --surface-1: #fcfcfb;
@@ -67,7 +67,7 @@
   }
 }
 
-:root[data-theme='light'] {
+:root[data-theme="light"] {
   color-scheme: light;
   --page: #f9f9f7;
   --surface-1: #fcfcfb;
@@ -190,7 +190,9 @@ button {
   background: color-mix(in srgb, var(--surface-1) 70%, transparent);
   color: var(--text-secondary);
   font-size: 14px;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .tab:hover {
@@ -198,7 +200,7 @@ button {
   color: var(--text-primary);
 }
 
-.tab[aria-selected='true'] {
+.tab[aria-selected="true"] {
   background: var(--text-primary);
   color: var(--page);
   border-color: transparent;
@@ -247,7 +249,7 @@ button {
   color: var(--text-primary);
 }
 
-.segmented button[aria-pressed='true'] {
+.segmented button[aria-pressed="true"] {
   background: var(--surface-1);
   color: var(--text-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -299,12 +301,19 @@ button {
   padding: 10px 18px;
   border-radius: 999px;
   border: 0;
-  background: linear-gradient(90deg, var(--series-1), var(--series-7) 55%, var(--series-5));
+  background: linear-gradient(
+    90deg,
+    var(--series-1),
+    var(--series-7) 55%,
+    var(--series-5)
+  );
   color: #fff;
   font-size: 14px;
   font-weight: 650;
   box-shadow: 0 6px 20px var(--glow-a);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .share-btn:hover {
@@ -334,7 +343,12 @@ button {
 }
 
 .hero h1 .year {
-  background: linear-gradient(90deg, var(--series-1), var(--series-7) 55%, var(--series-5));
+  background: linear-gradient(
+    90deg,
+    var(--series-1),
+    var(--series-7) 55%,
+    var(--series-5)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -440,7 +454,11 @@ button {
   flex-direction: column;
   justify-content: flex-end;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--series-1) 18%, transparent), transparent 70%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--series-1) 18%, transparent),
+      transparent 70%
+    ),
     var(--surface-1);
 }
 
@@ -950,7 +968,7 @@ table.data thead th:first-child {
 /* ---------- story cards ---------- */
 
 .story-dialog {
-  width: min(1180px, calc(100vw - 32px));
+  width: min(1980px, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
   padding: 20px;
   border: 1px solid var(--border);
