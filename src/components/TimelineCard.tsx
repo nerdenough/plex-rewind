@@ -308,32 +308,34 @@ export function TimelineCard({ title, subtitle, timeline, unit, childUnit, singl
             {plural(weekTotal, unit[0], unit[1])}
             {!single && week.length > 0 && ` · ${fmtInt(week.length)} different`}
           </div>
-          {week.length === 0 ? (
-            <div className="empty" style={{ padding: '24px 0' }}>
-              Nothing this week.
-            </div>
-          ) : (
-            <ol className="rank-list">
-              {week.slice(0, 10).map((r, i) => (
-                <li key={r.key} className="rank-row compact">
-                  <span className="pos">{i + 1}</span>
-                  <span className="swatch" style={{ background: single ? theme.series[0] : colorOf(r.key) }} />
-                  <span className="name">
-                    <div className="title" title={r.label}>
-                      {r.label}
-                    </div>
-                    <div className="meta">
-                      {[r.sub, childUnit && r.children ? plural(r.children, childUnit[0], childUnit[1]) : null]
-                        .filter(Boolean)
-                        .join(' · ')}
-                    </div>
-                    <div className="bar" style={{ width: `${(r.plays / maxInWeek) * 100}%`, opacity: 0.35 }} />
-                  </span>
-                  <span className="count">{fmtInt(r.plays)}</span>
-                </li>
-              ))}
-            </ol>
-          )}
+          <div className="week-list">
+            {week.length === 0 ? (
+              <div className="empty" style={{ padding: '24px 0' }}>
+                Nothing this week.
+              </div>
+            ) : (
+              <ol className="rank-list">
+                {week.slice(0, 10).map((r, i) => (
+                  <li key={r.key} className="rank-row compact">
+                    <span className="pos">{i + 1}</span>
+                    <span className="swatch" style={{ background: single ? theme.series[0] : colorOf(r.key) }} />
+                    <span className="name">
+                      <div className="title" title={r.label}>
+                        {r.label}
+                      </div>
+                      <div className="meta">
+                        {[r.sub, childUnit && r.children ? plural(r.children, childUnit[0], childUnit[1]) : null]
+                          .filter(Boolean)
+                          .join(' · ')}
+                      </div>
+                      <div className="bar" style={{ width: `${(r.plays / maxInWeek) * 100}%`, opacity: 0.35 }} />
+                    </span>
+                    <span className="count">{fmtInt(r.plays)}</span>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
           {!single && chartToppers && (
             <p className="footnote">
               Most weeks at #1: <strong>{chartToppers.label}</strong> ({plural(chartToppers.n, 'week')})

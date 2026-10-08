@@ -466,6 +466,18 @@ button {
   min-width: 0;
 }
 
+/* Reserve room for a full top 10 so the card (and the chart beside it)
+   keeps the same height from week to week. */
+.week-panel {
+  --week-row: 52px;
+}
+
+@media (min-width: 961px) {
+  .week-list {
+    min-height: calc(10 * var(--week-row) + 9 * 2px);
+  }
+}
+
 @media (max-width: 960px) {
   .week-panel {
     border-left: 0;
@@ -542,7 +554,20 @@ button {
 
 .rank-row.compact {
   grid-template-columns: 18px 10px minmax(0, 1fr) auto;
-  padding: 5px 4px;
+  padding: 0 4px;
+  height: var(--week-row);
+}
+
+.rank-row.compact .title {
+  line-height: 18px;
+}
+
+.rank-row.compact .meta {
+  line-height: 16px;
+}
+
+.rank-row.compact .meta:empty {
+  display: none;
 }
 
 .rank-row:hover {
