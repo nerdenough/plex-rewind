@@ -4,7 +4,7 @@ import { defineConfig, loadEnv, type ProxyOptions } from "vite";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "TAUTULLI_");
-  const target = env.TAUTULLI_URL || "http://10.0.0.20:8181";
+  const target = env.TAUTULLI_URL || "http://localhost:8181";
   const apiKey = env.TAUTULLI_API_KEY || "";
 
   // The browser calls /tautulli?cmd=...; the dev/preview server appends the
